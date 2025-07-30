@@ -1,14 +1,13 @@
-# Usa imagem leve com NGINX estável
-FROM nginx:stable-alpine
+FROM nginx:alpine
 
-# Remove conteúdo padrão da imagem
+# Remove arquivos padrão do NGINX
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copia os arquivos HTML para o diretório raiz do NGINX
-COPY ./html/ /usr/share/nginx/html/
+# Copia todo o conteúdo da raiz do repositório para o NGINX
+COPY . /usr/share/nginx/html/
 
-# Expõe a porta padrão
+# Expondo a porta padrão
 EXPOSE 80
 
-# Mantém o NGINX em execução no primeiro plano
+# Comando padrão do NGINX
 CMD ["nginx", "-g", "daemon off;"]
